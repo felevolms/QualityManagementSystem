@@ -5,7 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Socialite;
+use Illuminate\Http\Response;
+use Laravel\Socialite\Facades\Socialite;
 
 class LoginController extends Controller
 {
@@ -38,6 +39,7 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
     public function redirectToProvider()
     {
         return Socialite::driver('google')->redirect();
@@ -46,13 +48,21 @@ class LoginController extends Controller
     /**
      * Obtain the user information from Google.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function handleProviderCallback()
     {
         $user = Socialite::driver('google')->user();
 
-        return $user->token;
+        // TODO implement user registration
+
+        // check if email exist
+
+        // if so login
+
+        // if not redirect to login page
+
+        return new Response();
     }
 
 }
