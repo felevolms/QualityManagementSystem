@@ -55,18 +55,22 @@ class LoginController extends Controller
     {
         $user = Socialite::driver('google')->user();
 
-        return $user->name;
 
         $users= new Users;
+        $emailexist = Users::where('email', $user->email)->get();
+        if($emailexist=='[]')
+        {
+            $users->name = $user->name;
+
+            $users->email = $user->email;
+
+            $users->google_token = $user->token;
+
+            $users->save();
+        }
+        else return $user->name;
 
 
-        $users->name = $user->name;
-
-        $users->email = $user->email;
-
-        $users->google_token = $user->token;
-
-        $users->save();
 
         // TODO implement user registration
 
