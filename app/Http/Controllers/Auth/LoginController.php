@@ -54,6 +54,8 @@ class LoginController extends Controller
     {
         $user = Socialite::driver('google')->user();
 
+        return $user->name;
+
         // TODO implement user registration
 
         // check if email exist
