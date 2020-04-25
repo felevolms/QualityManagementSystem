@@ -68,17 +68,9 @@ class LoginController extends Controller
 
             $users->save();
         }
-        else return $user->name;
+        return redirect('/homepage');
 
-
-
-        // TODO implement user registration
-
-        // check if email exist
-
-        // if so login
-
-        // if not redirect to login page
+        
 
         return new Response();
     }
