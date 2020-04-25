@@ -7,6 +7,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Response;
 use Laravel\Socialite\Facades\Socialite;
+use App\Users;
 
 class LoginController extends Controller
 {
@@ -55,6 +56,17 @@ class LoginController extends Controller
         $user = Socialite::driver('google')->user();
 
         return $user->name;
+
+        $users= new Users;
+
+
+        $users->name = $user->name;
+
+        $users->email = $user->email;
+
+        $users->google_token = $user->token;
+
+        $users->save();
 
         // TODO implement user registration
 
