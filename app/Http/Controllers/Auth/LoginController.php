@@ -66,11 +66,13 @@ class LoginController extends Controller
 
             $users->google_token = $user->token;
 
+            $users->departaments_id =1;
+
             $users->save();
         }
         return redirect('/homepage');
 
-        
+
 
         return new Response();
     }
