@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,12 +17,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function (){
     return view('/auth/login');
 });
-Route::get('/homepage', function (){
-    return view('home');
-});
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('login/google', 'Auth\LoginController@redirectToProvider');
 Route::get('login/google/callback', 'Auth\LoginController@handleProviderCallback');
+
+Route::get('/documents', 'DocumentController@index')->name('documents.index');
+Route::get('/documents/{document}', 'DocumentController@show')->name('documents.show');
