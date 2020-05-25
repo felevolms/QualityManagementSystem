@@ -26,3 +26,7 @@ Route::get('login/google/callback', 'Auth\LoginController@handleProviderCallback
 
 Route::get('/documents', 'DocumentController@index')->name('documents.index');
 Route::get('/documents/{document}', 'DocumentController@show')->name('documents.show');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
