@@ -10882,7 +10882,7 @@ a.text-dark:focus {
   }
 }
 
-.modal-body p {
+.offcanvas--text {
   font-size: 18px;
 }
 

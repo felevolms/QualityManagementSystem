@@ -17,11 +17,11 @@
                 @foreach($document->versions as $version)
                     <div class="card">
                         <div class="card-header">
-                            <p class="d-inline-block m-0 align-middle">
-                                <a href="/document-versions/{{$version->id}}">
+                            <a href="/document-versions/{{$version->id}}">
+                                <p class="document--title d-inline-block m-0 align-middle">
                                     {{$document->title}} - wersja {{$version->version}} (kliknij, aby pobrać)
-                                </a>
-                            </p>
+                                </p>
+                            </a>
 
 {{--                            <a class="btn btn-sm btn-danger ml-2 d-inline-block float-right" href="#"--}}
 {{--                               data-toggle="modal" data-target="#deleteVersion">Usuń tę wersję</a>--}}

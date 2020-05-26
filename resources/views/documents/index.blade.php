@@ -14,11 +14,11 @@
             <div class="col-md-8">
                 @foreach($documents as $document)
                     <div class="card mb-2">
-                        <a href="/documents/{{$document->id}}" class="text-dark">
-                            <div class="card-body">
+                        <div class="card-body">
+                            <a href="/documents/{{$document->id}}" class="text-dark">
                                 <p class="document--title mb-0">{{$document->title}}</p>
-                            </div>
-                        </a>
+                            </a>
+                        </div>
                     </div>
                 @endforeach
             </div>
