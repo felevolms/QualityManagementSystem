@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'default' => env('FILESYSTEM_DRIVER', 'local'),
+    'default' => env('FILESYSTEM_DRIVER', 'azure'),
 
     /*
     |--------------------------------------------------------------------------
@@ -26,7 +26,7 @@ return [
     |
     */
 
-    'cloud' => env('FILESYSTEM_CLOUD', 's3'),
+    'cloud' => env('FILESYSTEM_CLOUD', 'azure'),
 
     /*
     |--------------------------------------------------------------------------
@@ -65,12 +65,13 @@ return [
         ],
 
         'azure' => [
-            'driver'    => 'azure',
-            'name'      => env('AZURE_STORAGE_NAME'),
-            'key'       => env('AZURE_STORAGE_KEY'),
-            'container' => env('AZURE_STORAGE_CONTAINER'),
-            'url'       => env('AZURE_STORAGE_URL'),
-            'prefix'    => null,
+            'driver'            => 'azure',
+            'local_address'     => env('AZURE_STORAGE_LOCAL_ADDRESS', null),
+            'name'              => env('AZURE_STORAGE_NAME'),
+            'key'               => env('AZURE_STORAGE_KEY'),
+            'container'         => env('AZURE_STORAGE_CONTAINER'),
+            'prefix'            => env('AZURE_STORAGE_PREFIX', null),
+            'url'               => env('AZURE_STORAGE_URL', null),
         ],
 
     ],
