@@ -5,10 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Illuminate\Http\Request;
-use App\User;
-use Socialite;
-use Auth;
+use Illuminate\Support\Facades\Auth;
+use Laravel\Socialite\Facades\Socialite;
 use App\Users;
 
 class LoginController extends Controller
@@ -42,29 +40,29 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
     public function redirectToProvider()
     {
         return Socialite::driver('google')->redirect();
     }
+
     public function handleProviderCallback()
     {
-        $user = Socialite::driver('google')->user();
+        $gUser = Socialite::driver('google')->user();
 
-        $users = new Users;
-        $userexist = Users::where('email', $user->email)->first();
+        $dbUser = Users::where('email', $gUser->email)->first();
 
-        if ($userexist) {
-            Auth::loginUsingId($userexist->id,true);
+        if (empty($dbUser)) {
+            $dbUser->name = $gUser->name;
+
+            $dbUser->email = $gUser->email;
+
+            $dbUser->google_token = $gUser->token;
+
+            $dbUser->save();
         }
-        else {
-            $users->name = $user->name;
 
-            $users->email = $user->email;
-
-            $users->google_token = $user->token;
-
-            $users->save();
-        }
+        Auth::loginUsingId($dbUser->id, true);
 
         return redirect('/documents');
     }
