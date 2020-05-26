@@ -13,10 +13,10 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 @foreach($documents as $document)
-                    <div class="card">
-                        <a href="/documents/{{$document->id}}">
+                    <div class="card mb-2">
+                        <a href="/documents/{{$document->id}}" class="text-dark">
                             <div class="card-body">
-                                {{$document->title}}
+                                <p class="document--title">{{$document->title}}</p>
                             </div>
                         </a>
                     </div>
