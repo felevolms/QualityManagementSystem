@@ -10883,6 +10883,10 @@ a.text-dark:focus {
 }
 
 .modal-body p {
-  font-size: 24px;
+  font-size: 18px;
+}
+
+.document--title {
+  font-size: 16px;
 }
 

@@ -8,7 +8,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <p class="font-weight-bold">Na pewno chcesz usunąć {{$name}}?</p>
+                <p class="offcanvas--text font-weight-bold">Na pewno chcesz usunąć {{$name}}?</p>
             </div>
             <div class="modal-footer">
                 <form method="post" action="/documents/{{$objectId}}" class="m-0">

@@ -16,7 +16,7 @@
                     <div class="card mb-2">
                         <a href="/documents/{{$document->id}}" class="text-dark">
                             <div class="card-body">
-                                <p class="document--title">{{$document->title}}</p>
+                                <p class="document--title mb-0">{{$document->title}}</p>
                             </div>
                         </a>
                     </div>
