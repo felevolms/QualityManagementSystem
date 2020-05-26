@@ -2,17 +2,13 @@
 
 @section('content')
     <div class="container">
-        <div class="row justify-content-center">
-            <h1>Nowy dokument</h1>
+        <div class="row justify-content-center mb-3">
+            <h1>Nowa wersja dokumentu {{$document->title}}</h1>
         </div>
 
-        <form method="post" action="/documents" enctype="multipart/form-data" class="justify-content-center">
+        <form method="post" action="/documents/{{$document->id}}" enctype="multipart/form-data" class="justify-content-center">
+            @method('PUT')
             @csrf
-
-            <div class="form-group">
-                <label for="name">Nazwa dokumentu</label>
-                <input class="form-control" type="text" id="title" name="title" placeholder="Nazwa dokumentu">
-            </div>
 
             <div class="form-group">
                 <div class="input-group input-file" data-name="document">

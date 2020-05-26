@@ -15,7 +15,13 @@ class Document extends Model
         'versions'
     ];
 
-    public function versions() {
+    public function versions()
+    {
         return $this->hasMany(DocumentVersion::class);
+    }
+
+    public function getLatestVersion(): int
+    {
+        return $this->versions->sortByDesc('version')->first()->version;
     }
 }

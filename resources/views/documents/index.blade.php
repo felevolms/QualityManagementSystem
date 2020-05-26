@@ -2,11 +2,11 @@
 
 @section('content')
     <div class="container">
-        <div class="row">
+        <div class="row justify-content-center">
             <h1>Lista dokumentów</h1>
         </div>
 
-        <div class="row">
+        <div class="row justify-content-center mb-3">
             <a class="btn btn-primary" href="/documents/create">Dodaj nowy dokument</a>
         </div>
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Document;
 use App\DocumentVersion;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -38,7 +39,7 @@ class DocumentVersionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
     }
 
     /**

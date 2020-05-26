@@ -64,7 +64,7 @@ class DocumentController extends Controller
         ]);
 
         return redirect('/documents')->with([
-            'message' => 'Added a document'
+            'message' => 'Dodano nowy dokument'
         ]);
     }
 
@@ -76,6 +76,8 @@ class DocumentController extends Controller
      */
     public function show(Document $document)
     {
+        $document->versions = $document->versions->sortByDesc('version');
+
         return view('documents.show', compact('document'));
     }
 
@@ -83,11 +85,11 @@ class DocumentController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param Document $document
-     * @return Response
+     * @return View
      */
     public function edit(Document $document)
     {
-        //
+        return view('documents.new-version', compact('document'));
     }
 
     /**
@@ -95,11 +97,25 @@ class DocumentController extends Controller
      *
      * @param Request $request
      * @param Document $document
-     * @return Response
+     * @return Redirector
      */
     public function update(Request $request, Document $document)
     {
-        //
+        $data = $request->validate([
+            'document' => 'required|file'
+        ]);
+
+        $path = $request->file('document')->store('documents');
+
+        $newVersion = DocumentVersion::create([
+            'url' => $path,
+            'version' => $document->getLatestVersion() + 1,
+            'document_id' => $document->id
+        ]);
+
+        return redirect('/documents')->with([
+            'message' => 'Dodano nową wersję dokumentu'
+        ]);
     }
 
     /**
