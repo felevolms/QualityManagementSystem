@@ -14,19 +14,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function (){
-    return view('/auth/login');
-});
+Route::get('/', 'PageController@index');
 
+/* auth */
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
 Route::get('login/google', 'Auth\LoginController@redirectToProvider');
 Route::get('login/google/callback', 'Auth\LoginController@handleProviderCallback');
 
-Route::get('/documents', 'DocumentController@index')->name('documents.index');
-Route::get('/documents/{document}', 'DocumentController@show')->name('documents.show');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
+/* crud */
+Route::middleware('auth')->group(function() {
+    Route::get('/documents', 'DocumentController@index')->name('documents.index');
+    Route::get('/documents/{document}', 'DocumentController@show')->name('documents.show');
+});
