@@ -18,14 +18,19 @@ class PermissionSeeder extends Seeder
         // Reset cached roles and permissions
         app()[PermissionRegistrar::class]->forgetCachedPermissions();
 
+        // Create permissions
+        Permission::create(['guard_name' => 'web', 'name' => 'delete document']);
+        Permission::create(['guard_name' => 'web', 'name' => 'delete version']);
+
         // Create roles and assign created permissions
         $this->createRole('admin');
-        $this->createRole('it');
-        $this->createRole('hr');
-        $this->createRole('tech');
-        $this->createRole('director_it');
-        $this->createRole('director_hr');
-        $this->createRole('director_tech');
+        $this->createRole('user');
+        $this->createRole('director');
+
+        Role::findByName('director')->givePermissionTo([
+            'delete document',
+            'delete version'
+        ]);
     }
 
     private function createRole($roleName) {

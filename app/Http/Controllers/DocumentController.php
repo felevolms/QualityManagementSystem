@@ -16,6 +16,14 @@ use Illuminate\View\View;
 class DocumentController extends Controller
 {
     /**
+     * DocumentController constructor.
+     */
+    public function __construct()
+    {
+        $this->middleware(['permission:delete document'])->only('destroy');
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return View
@@ -122,10 +130,12 @@ class DocumentController extends Controller
      * Remove the specified resource from storage.
      *
      * @param Document $document
-     * @return Response
+     * @return Redirector
      */
     public function destroy(Document $document)
     {
-        //
+        $document->delete();
+
+        return redirect('/documents');
     }
 }

@@ -2,15 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Document;
 use App\DocumentVersion;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
 class DocumentVersionController extends Controller
 {
+    /**
+     * DocumentVersionController constructor.
+     */
+    public function __construct()
+    {
+        $this->middleware(['permission:delete version'])->only('destroy');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -84,10 +92,14 @@ class DocumentVersionController extends Controller
      * Remove the specified resource from storage.
      *
      * @param DocumentVersion $documentVersion
-     * @return Response
+     * @return Redirector
      */
     public function destroy(DocumentVersion $documentVersion)
     {
-        //
+        $redirectId = $documentVersion->document->id;
+
+        $documentVersion->delete();
+
+        return redirect('/documents/' . $redirectId);
     }
 }

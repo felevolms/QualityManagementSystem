@@ -4,10 +4,10 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
+use App\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
-use App\Users;
 
 class LoginController extends Controller
 {
@@ -54,16 +54,18 @@ class LoginController extends Controller
     {
         $gUser = Socialite::driver('google')->user();
 
-        $dbUser = Users::where('email', $gUser->email)->first();
+        $dbUser = User::where('email', $gUser->email)->first();
 
         if (empty($dbUser)) {
-            $dbUser->name = $gUser->name;
+            $dbUser = User::create([
+                'name' => $gUser->name,
+                'email' => $gUser->email,
+                'google_token' => $gUser->token
+            ]);
 
-            $dbUser->email = $gUser->email;
-
-            $dbUser->google_token = $gUser->token;
-
-            $dbUser->save();
+            if(User::all()->count() === 1) {
+                $dbUser->assignRole('admin')->save();
+            }
         }
 
         Auth::loginUsingId($dbUser->id, true);

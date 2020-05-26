@@ -11,7 +11,7 @@
                 <p class="offcanvas--text font-weight-bold">Na pewno chcesz usunąć {{$name}}?</p>
             </div>
             <div class="modal-footer">
-                <form method="post" action="/documents/{{$objectId}}" class="m-0">
+                <form method="post" action="{{$action}}" class="m-0">
                     @method('DELETE')
                     @csrf
                     <button type="button" class="btn btn-success" data-dismiss="modal">Anuluj</button>

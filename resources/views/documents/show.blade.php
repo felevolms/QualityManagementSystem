@@ -8,8 +8,14 @@
 
         <div class="row justify-content-center mb-3">
             <a class="btn btn-primary" href="/documents/{{$document->id}}/edit">Dodaj nową wersję dokumentu</a>
-            <a class="btn btn-danger ml-2" href="#" data-toggle="modal" data-target="#deleteDoc">Usuń ten dokument</a>
-            @include('offcanvas.delete', ['modalId' => 'deleteDoc', 'objectId' => $document->id, 'name' => $document->title])
+            @can('delete document')
+                <a class="btn btn-danger ml-2" href="#" data-toggle="modal" data-target="#deleteDoc">Usuń ten dokument</a>
+                @include('offcanvas.delete', [
+                    'modalId' => 'deleteDoc',
+                    'name' => $document->title,
+                    'action' => '/documents/' . $document->id
+                ])
+            @endcan
         </div>
 
         <div class="row justify-content-center">
@@ -23,13 +29,15 @@
                                 </p>
                             </a>
 
-{{--                            <a class="btn btn-sm btn-danger ml-2 d-inline-block float-right" href="#"--}}
-{{--                               data-toggle="modal" data-target="#deleteVersion">Usuń tę wersję</a>--}}
-{{--                            @include('offcanvas.delete', [--}}
-{{--                                'modalId' => 'deleteVersion',--}}
-{{--                                'objectId' => $version->id,--}}
-{{--                                'name' => 'wersję ' . $version->version . ' dokumentu ' . $document->title--}}
-{{--                            ])--}}
+                            @can('delete version')
+                                <a class="btn btn-sm btn-danger ml-2 d-inline-block float-right" href="#"
+                                   data-toggle="modal" data-target="#deleteVersion{{$version->version}}">Usuń tę wersję</a>
+                                @include('offcanvas.delete', [
+                                    'modalId' => 'deleteVersion' . $version->version,
+                                    'name' => 'wersję ' . $version->version . ' dokumentu ' . $document->title,
+                                    'action' => '/document-versions/' . $version->id
+                                ])
+                            @endcan
                         </div>
 
                         <div class="card-body">
