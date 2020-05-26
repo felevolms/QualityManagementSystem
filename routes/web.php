@@ -23,6 +23,6 @@ Route::get('login/google/callback', 'Auth\LoginController@handleProviderCallback
 
 /* crud */
 Route::middleware('auth')->group(function() {
-    Route::get('/documents', 'DocumentController@index')->name('documents.index');
-    Route::get('/documents/{document}', 'DocumentController@show')->name('documents.show');
+    Route::resource('/documents', 'DocumentController');
+    Route::resource('/document-versions', 'DocumentVersionController');
 });

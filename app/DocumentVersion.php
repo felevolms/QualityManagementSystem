@@ -8,10 +8,11 @@ class DocumentVersion extends Model
 {
     protected $fillable = [
         'url',
-        'version'
+        'version',
+        'document_id'
     ];
 
     public function document() {
-        return $this->hasOne(Document::class);
+        return $this->belongsTo(Document::class);
     }
 }

@@ -2,6 +2,14 @@
 
 @section('content')
     <div class="container">
+        <div class="row">
+            <h1>Lista dokumentów</h1>
+        </div>
+
+        <div class="row">
+            <a class="btn btn-primary" href="/documents/create">Dodaj nowy dokument</a>
+        </div>
+
         <div class="row justify-content-center">
             <div class="col-md-8">
                 @foreach($documents as $document)
